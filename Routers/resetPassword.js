@@ -48,6 +48,7 @@ router.get('/:id/:token', verifyUser, async (req, res) => {
 // update new password
 router.patch('/update/:id/:token', verifyUser, async (req, res) => {
     try{
+        // check for empty data
         if(req.body.newPassword != req.body.confirmNewPassword){
             return res.status(400).json({error: 'Password does not match', acknowledged: false})
         }
@@ -56,6 +57,7 @@ router.patch('/update/:id/:token', verifyUser, async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(req.body.newPassword, salt);
 
+        // saving updated password
         req.user.token = '' ;
         req.user.password = hashedPassword ;
         await req.user.save() ;

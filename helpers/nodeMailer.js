@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 
+// send password reset mail
 export async function sentMail(email, id, token, link){
     let transport = nodemailer.createTransport({
         service: 'gmail',
