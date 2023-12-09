@@ -1,5 +1,6 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 import { getUserByToken } from '../controller/user.js';
 
 const router = express.Router();
@@ -11,10 +12,11 @@ const verifyUser = async (req, res, next) => {
 
         // check user
         const user = await getUserByToken(token);
-        if(!user) return res.status(400).json({data: 'link invalid or expired', acknowledged: false})
+        if(!user) return res.status(400).json({error: 'link invalid or expired', acknowledged: false})
 
         // JWT verify
         const jwtVerify = jwt.verify( token , process.env.SECRET_KEY );
+        if(!jwtVerify) res.status(400).json({error: 'link invalid or expired', acknowledged: false})
 
         // attach user
         req.user = user;
@@ -44,14 +46,21 @@ router.get('/:id/:token', verifyUser, async (req, res) => {
 });
 
 // update new password
-router.patch('/:id/:token', verifyUser, async (req, res) => {
+router.patch('/update/:id/:token', verifyUser, async (req, res) => {
     try{
+        if(req.body.newPassword != req.body.confirmNewPassword){
+            return res.status(400).json({error: 'Password does not match', acknowledged: false})
+        }
 
-        user.token = '' ;
-        user.password = req.body.newPassword ;
-        await user.save() ;
+        // hash password
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(req.body.newPassword, salt);
 
-        res.status(200).json({data: 'new password updated', acknowledged: true});
+        req.user.token = '' ;
+        req.user.password = hashedPassword ;
+        await req.user.save() ;
+
+        res.status(200).json({message: 'new password updated', acknowledged: true});
 
     }catch(err){
         res.status(500).json({error: 'Internal Server Error', message:err});

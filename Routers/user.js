@@ -5,7 +5,7 @@ import { getUser, newUser } from '../controller/user.js';
 const router = express.Router();
 
 // login
-router.get('/user', async (req, res) => {
+router.post('/user', async (req, res) => {
     try{
         // user exist
         const user = await getUser(req);
@@ -29,8 +29,6 @@ router.post('/newuser', async (req, res) => {
         // check user
         const checkUser = await getUser(req);
         if(checkUser) return res.status(400).json({error: 'user already exist'});
-
-        console.log(checkUser);
 
         // hash password
         const salt = await bcrypt.genSalt(10);

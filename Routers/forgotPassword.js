@@ -15,7 +15,8 @@ router.post('/', async (req, res) => {
         // generate token
         const token = genearateToken(user._id);
         // sent mail with token
-        const sentedMail = await sentMail(user._id, token);
+        const sentedMail = await sentMail(req.body.email, user._id, token, req.body.link);
+        // console.log(sentedMail);
         if(!sentedMail)  return res.status(400).json({error: 'error sending mail'});
 
         // save token in Database
