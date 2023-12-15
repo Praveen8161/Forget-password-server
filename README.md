@@ -15,6 +15,7 @@ Get the user data and store it in the dataBase
 Automatically send a email to the user for Authentication
 
 ***Request Format***
+
 {
     "email": "okok@gmail.com",
     "password": "example"
@@ -26,6 +27,7 @@ Automatically send a email to the user for Authentication
 Get the user data and check the user details in the database
 
 ***Request Format***
+
 {
     "email": "rkoprvn@gmail.com",
     "password": "example"
@@ -37,6 +39,7 @@ Get the user data and check the user details in the database
 Get the user email and check the user details in the database and send a Password Reset link to the User email
 
 ***Request Format***
+
 {
     "email": "rkoprvn@gmail.com"
 }
@@ -49,7 +52,9 @@ When the User click the password reset email it will check the data and allow th
 ### PATCH
 **update new password**
   `https://forget-password-server.onrender.com/forgot`
+  
 ***Request Format***
+
 {
   "newPassword": "123",
   "confirmPassword": "123"
