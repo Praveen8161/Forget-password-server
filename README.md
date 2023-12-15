@@ -6,6 +6,7 @@
 - Forgot Password creates a temporary token and send a mail to the user to update the password
 
 **Base URL**
+
 URL - https://forget-password-server.onrender.com/
 
 ### POST
@@ -29,7 +30,7 @@ Get the user data and check the user details in the database
 ***Request Format***
 
 {
-    "email": "rkoprvn@gmail.com",
+    "email": "oki@gmail.com",
     "password": "example"
 }
 
@@ -41,7 +42,7 @@ Get the user email and check the user details in the database and send a Passwor
 ***Request Format***
 
 {
-    "email": "rkoprvn@gmail.com"
+    "email": "oki@gmail.com"
 }
 
 ### GET
