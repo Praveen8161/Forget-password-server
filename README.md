@@ -65,7 +65,7 @@ When the User click the password reset email it will check the data and allow th
 - [API](https://documenter.getpostman.com/view/31335509/2s9YkkgPSB)
 
 ## Front End Live Site
-- [Live Site](https://kaleidoscopic-crepe-c6c530.netlify.app/)
+- [Live Site](https://forgot-password-8161.netlify.app/)
 
 ## Live Site
 - [Live Site](https://forget-password-server.onrender.com/)
